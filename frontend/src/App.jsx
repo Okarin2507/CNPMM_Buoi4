@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import Header from './components/Header';
@@ -12,6 +13,8 @@ function App() {
         {token && <Header />}
         <Routes>
           <Route path="/login" element={!token ? <Login /> : <Navigate to="/" />} />
+          <Route path="/register" element={!token ? <Register /> : <Navigate to="/" />} />
+          <Route path="/home" element={token ? <Home /> : <Navigate to="/login" />} />
           <Route path="/" element={token ? <Home /> : <Navigate to="/login" />} />
           <Route path="/product/:id" element={token ? <ProductDetail /> : <Navigate to="/login" />} />
         </Routes>

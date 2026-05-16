@@ -8,6 +8,7 @@ const globalLimiter = rateLimit({
     limit: 100, // Giới hạn mỗi IP là 100 request mỗi cửa sổ 15 phút
     standardHeaders: 'draft-7', // Sử dụng RateLimit headers mới nhất
     legacyHeaders: false, // Tắt X-RateLimit-* headers cũ
+    validate: { default: false }, // Tắt kiểm tra double count để áp dụng nhiều tầng limiter
     store: new RedisStore({
         sendCommand: (...args) => redisClient.sendCommand(args),
     }),
@@ -20,9 +21,10 @@ const globalLimiter = rateLimit({
 // Bộ giới hạn nghiêm ngặt hơn cho các tính năng nhạy cảm (Đăng nhập, Đăng ký)
 const authLimiter = rateLimit({
     windowMs: 60 * 60 * 1000, // 1 giờ
-    limit: 5, // Chỉ cho phép 5 lần thử sai mỗi giờ
+    limit: 10, // Tăng lên 10 lần cho thoải mái test
     standardHeaders: 'draft-7',
     legacyHeaders: false,
+    validate: { default: false }, // Tắt kiểm tra double count
     store: new RedisStore({
         sendCommand: (...args) => redisClient.sendCommand(args),
     }),

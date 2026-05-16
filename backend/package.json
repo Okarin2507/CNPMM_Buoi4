@@ -19,7 +19,14 @@
     "express-rate-limit": "^8.5.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.6.2",
+    "nodemailer": "^8.0.7",
     "rate-limit-redis": "^5.0.0",
     "redis": "^5.12.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/node": "^7.29.0",
+    "@babel/preset-env": "^7.29.5",
+    "nodemon": "^3.1.14"
   }
 }
